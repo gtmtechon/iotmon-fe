@@ -1,6 +1,7 @@
 <template>
   <div class="page-container">
     <h1>등록된 IoT 장비 목록</h1>
+    <h2>(DevOps Test)</h2>
     <router-link to="/devices/register" class="button primary">새 장비 등록</router-link>
 
     <div v-if="loading" class="loading-message">장비 목록을 불러오는 중...</div>
