@@ -1,5 +1,3 @@
-// iot-temperature-monitor-frontend/src/views/MonitorDevicePage.vue
-
 <template>
   <div class="page-container">
     <h1>{{ deviceName }} 모니터링</h1>
@@ -51,6 +49,16 @@
 import axios from 'axios';
 import TemperatureChart from '../components/TemperatureChart.vue';
 
+const apiClient = axios.create({
+  baseURL: process.env.VUE_APP_BACKEND_API_URL,
+  headers: {
+    'Content-Type': 'application/json',
+    'Ocp-Apim-Subscription-Key': process.env.VUE_APP_APIM_SUBSCRIPTION_KEY // 모든 요청에 공통으로 추가될 헤더
+  },
+  timeout: 5000 // 5초 타임아웃 설정 (기본 인스턴스에 적용)
+});
+
+
 export default {
   name: 'MonitorDevicePage',
   components: {
@@ -76,6 +84,9 @@ export default {
     async fetchDeviceDetails() {
       try {
         const response = await axios.get(`${process.env.VUE_APP_BACKEND_API_URL}/devices/${this.deviceId}`);
+        if (!response.data) {
+          throw new Error('장비 정보를 찾을 수 없습니다.');
+        }
         this.device = response.data;
         this.deviceName = this.device.deviceName || '알 수 없는 장비';
       } catch (err) {
