@@ -83,7 +83,7 @@ export default {
   methods: {
     async fetchDeviceDetails() {
       try {
-          const response = await apiClient.post('/devices', deviceData);
+         const response = await apiClient.get('/devices');
         if (!response.data) {
           throw new Error('장비 정보를 찾을 수 없습니다.');
         }
