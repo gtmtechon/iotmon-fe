@@ -83,7 +83,7 @@ export default {
   methods: {
     async fetchDeviceDetails() {
       try {
-        const response = await axios.get(`${process.env.VUE_APP_BACKEND_API_URL}/devices/${this.deviceId}`);
+          const response = await apiClient.post('/devices', deviceData);
         if (!response.data) {
           throw new Error('장비 정보를 찾을 수 없습니다.');
         }
@@ -98,9 +98,9 @@ export default {
       this.loading = true;
       this.error = null;
       try {
-        const temperatureResponse = await axios.get(
-          `${process.env.VUE_APP_BACKEND_API_URL}/temperatures/device/${this.deviceId}/recent?limit=${this.selectedTimeRange}`
-        );
+        //const temperatureResponse = await axios.get(`${process.env.VUE_APP_BACKEND_API_URL}/temperatures/device/${this.deviceId}/recent?limit=${this.selectedTimeRange}`       );
+
+         const temperatureResponse = await apiClient.get(`${process.env.VUE_APP_BACKEND_API_URL}/temperatures/device/${this.deviceId}/recent?limit=${this.selectedTimeRange}`);
         this.temperatures = temperatureResponse.data; // 데이터를 받아 temperatures 배열에 할당
       } catch (err) {
         console.error('Error fetching temperatures:', err);

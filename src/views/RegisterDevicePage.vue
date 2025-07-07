@@ -56,7 +56,7 @@ export default {
           // 서버에서 에러 응답이 온 경우
           // 401 Unauthorized 오류일 경우 메시지 추가
           if (err.response.status === 401) {
-              this.error = `401 error.`;
+              this.error = `장비 등록에 실패했습니다: 인증 오류 (Subscription Key 누락 또는 잘못됨). 관리자에게 문의하세요.`;
           } else {
               this.error = `장비 등록에 실패했습니다: ${err.response.data?.message || err.response.data || err.message}`;
           }
