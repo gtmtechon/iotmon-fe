@@ -33,7 +33,6 @@ export default {
       isRegistering: false, // 등록 요청 진행 상태
     };
   },
-  },
   methods: {
     async registerDevice(deviceData) {
       this.error = null;
