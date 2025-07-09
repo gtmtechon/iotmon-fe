@@ -1,7 +1,11 @@
 <template>
   <div class="page-container">
     <h1>등록된 IoT 장비 목록</h1>
-    <router-link to="/devices/register" class="button primary">새 장비 등록</router-link>
+    <div class="header-buttons">
+      <router-link to="/devices/register" class="button primary">새 장비 등록</router-link>
+      <router-link to="/robots/status" class="button secondary">로봇상태조회</router-link>
+    </div>
+
 
     <div v-if="loading" class="loading-message">장비 목록을 불러오는 중...</div>
     <div v-else-if="error" class="error-message">{{ error }}</div>
@@ -67,7 +71,7 @@ export default {
       this.error = null;
       try {
         // 2. 생성된 apiClient 인스턴스를 사용하여 요청
-        const response = await apiClient.get('/devices');
+        const response = await apiClient.get('/devices'); // /api/devices 로 호출되는 부분
         this.devices = response.data;
       } catch (err) {
         console.error('Error fetching devices:', err);
@@ -81,7 +85,7 @@ export default {
       if (confirm(`정말 장비 ID: ${deviceId}를 삭제하시겠습니까?`)) {
         try {
           // 3. 생성된 apiClient 인스턴스를 사용하여 요청
-          await apiClient.delete(`/devices/${deviceId}`);
+          await apiClient.delete(`/devices/${deviceId}`); // /api/devices/{id} 로 호출되는 부분
           alert('장비가 성공적으로 삭제되었습니다.');
           this.fetchDevices(); // 목록 새로고침
         } catch (err) {
@@ -106,6 +110,14 @@ h1 {
   margin-bottom: 20px;
 }
 
+/* 새롭게 추가된 버튼 컨테이너 */
+.header-buttons {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* 버튼들 사이의 간격 */
+}
+
 .button {
   display: inline-block;
   padding: 10px 20px;
@@ -114,7 +126,7 @@ h1 {
   cursor: pointer;
   font-size: 1em;
   text-decoration: none;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; -> .header-buttons 로 이동 */
 }
 
 .button.primary {

@@ -3,6 +3,8 @@ import HomePage from '../views/HomePage.vue';
 import RegisterDevicePage from '../views/RegisterDevicePage.vue';
 import EditDevicePage from '../views/EditDevicePage.vue';
 import MonitorDevicePage from '../views/MonitorDevicePage.vue';
+import RobotStatusPage from '../views/RobotStatusPage.vue';
+
 
 const routes = [
   {
@@ -27,6 +29,12 @@ const routes = [
     component: MonitorDevicePage,
     props: true, // URL 파라미터를 컴포넌트 props로 전달
   },
+  {
+    path: '/robots/status',
+    name: 'RobotStatus',
+    component: RobotStatusPage,
+    props: true, // URL 파라미터를 컴포넌트 props로 전달
+  }
 ];
 
 const router = createRouter({
