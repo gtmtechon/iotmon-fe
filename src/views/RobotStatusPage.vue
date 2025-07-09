@@ -59,7 +59,7 @@ export default {
   },
   created() {
     // 컴포넌트 생성 시 axios 인스턴스 초기화
-    const backendApiUrl = process.env.VUE_APP_BACKEND_API_URL;
+    const backendApiUrl = process.env.VUE_APP_BACKEND_APIM_URL;
     const apimSubscriptionKey = process.env.VUE_APP_APIM_SUBSCRIPTION_KEY;
 
     if (!backendApiUrl) {
@@ -138,7 +138,7 @@ export default {
           return;
         }
 
-        const response = await this.apiClient.get('/waterbots');
+        const response = await this.apiClient.get('/robots/status');
         let robotData = response.data;
 
         if (!Array.isArray(robotData)) {
